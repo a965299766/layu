@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="vip.dulaogou.dao.IUserDao">
+ 	<select id="selectUserByNameAndPassword" resultType="User">
+ 		select uid, uname, upassword, uemail, uphone, uaddress
+ 		from user
+ 		where uname=#{uname}
+ 		and upassword=#{upassword}
+ 	</select>
+ 	
+ 	<insert id="insertUser">
+ 		insert into user(uname, upassword, uemail, uphone, uaddress) values(#{uname}, #{upassword}, #{uemail}, #{uphone}), #{uaddress}
+ 	</insert>
+ 	
+ 	<select id="getUserByName" resultType="User">
+ 		select uid, uname, upassword, uemail, uphone
+ 		from user
+ 		where uname=#{uname}
+ 	</select>
+ 	
+ 	<update id="updateUser">
+ 		update user set uname = #{uname}, upassword = #{upassword}, uphone = #{uphone}, uemail = #{uemail}, uaddress = #{uaddress}
+ 		where uid = #{uid}
+ 	</update>
+ 	
+ 	<select id="selectUserById" resultType="User">
+ 		select uid, uname, upassword, uemail, uphone, uaddress
+ 		from user
+ 		where uid = #{id}
+ 	</select>
+ </mapper>

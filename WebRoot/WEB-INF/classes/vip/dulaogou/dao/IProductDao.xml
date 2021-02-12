@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="vip.dulaogou.dao.IProductDao">
+ 	<insert id="insertProduct">
+ 		insert into product(pname, pfirsttype, psecondtype, pprice, pnum, ppublisherid, pdate, pcontent, ppicloc) 
+ 		values(#{pname}, #{pfirsttype}, #{psecondtype}, #{pprice}, #{pnum}, #{ppublisherid}, #{pdate}, #{pcontent}, #{ppicloc})
+ 	</insert>
+ 	
+ 	<select id="selectPublishedProductsById" resultType="Product">
+ 		select pid, pname, pfirsttype, psecondtype, pprice, pnum, pcontent, ppicloc, ppublisherid, pdate
+ 		from product 
+ 		where ppublisherid = #{id}
+ 	</select>
+ 	
+ 	<delete id="deleteProductById">
+ 		delete from product where pid = #{pid}
+ 	</delete>
+ 	
+ 	<select id="selectProductById" resultType="Product">
+ 		select pid, pname, pfirsttype, psecondtype, pprice, pnum, pcontent, ppicloc, ppublisherid, pdate
+ 		from product 
+ 		where pid = #{pid}
+ 	</select>
+ 	
+ 	<update id="updateProduct">
+ 		update product set pname = #{pname}, pfirsttype=#{pfirsttype}, psecondtype=#{psecondtype}, pprice = #{pprice}, pnum = #{pnum}, pcontent = #{pcontent}
+ 		where pid = #{pid}
+ 	</update>
+ 	
+ 	<select id="selectRandomProducts" resultType="Product">
+ 		select pid, pname, pfirsttype, psecondtype, pprice, pnum, pcontent, ppicloc, ppublisherid, pdate 
+ 		from product
+		order by rand() limit 8;
+ 	</select>
+ 	
+ 	<select id="selectAllProducts" resultType="Product">
+ 		select pid, pname, pfirsttype, psecondtype, pprice, pnum, pcontent, ppicloc, ppublisherid, pdate 
+ 		from product
+ 	</select>
+ 	
+ 	<update id="updateProductNum">
+ 		update product 
+ 		set pnum = pnum - #{pnum}
+ 		where 
+ 		pid = #{pid}
+ 	</update>
+ </mapper>
